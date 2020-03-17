@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public abstract class Game 
 {
-    private final String gameName;//the title of the game
+    private  String gameName;//the title of the game
     private ArrayList <Player> players;// the players of the game
     
     public Game(String givenName)
@@ -58,6 +58,10 @@ public abstract class Game
      * player.
      */
     public abstract void declareWinner();
+
+	public void setGameName(String gameName) {
+		this.gameName = gameName;
+	}
 
    
     

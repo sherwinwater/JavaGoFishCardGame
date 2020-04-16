@@ -1,3 +1,9 @@
+/**
+ * SYST 17796 Project Winter 2019 Base code.
+ *
+ * @Modifier: Group7: Thanveer Hauzaree,Yuxiao Fang,Shuwen Wang,Chen-yu Wu
+ * @updateDate: 2020-04-12
+ */
 package ca.sheridancollege.project;
 
 import java.util.ArrayList;
@@ -6,6 +12,7 @@ import java.util.HashMap;
 public class GoFishHand extends GroupOfCards {
 
     private ArrayList<GoFishCard> cards = new ArrayList<>();
+    private ArrayList<GoFishCard> book = new ArrayList<>();
     private GoFishDeck deck;
     private int score = 0;
     private int size;//the size of the grouping
@@ -23,10 +30,9 @@ public class GoFishHand extends GroupOfCards {
         this.cards = cards;
     }
 
-    public ArrayList<GoFishCard> showBook() {
+    public ArrayList<GoFishCard> getBook() {
         // map1 to find one book of cards
         // map2 to store and get the key for each card
-        ArrayList<GoFishCard> book = new ArrayList<>();
         HashMap<String, Integer> map1 = new HashMap<>();
         HashMap<Integer, String> map2 = new HashMap<>();
 
@@ -35,45 +41,44 @@ public class GoFishHand extends GroupOfCards {
             String key = card.getValue().toString();
             if (!map1.containsKey(key)) {
                 map1.put(key, 1);
-                map2.put(j, key);
             } else {
                 map1.put(key, map1.get(key) + 1);
-                map2.put(j, key);
             }
-            if (map1.get(key) == 4) {
-                for (HashMap.Entry<Integer, String> entry : map2.entrySet()) {
-                    if (entry.getValue().equals(key)) {
-                        book.add(cards.get(entry.getKey()));
-                    }
-                }
-            }
+            map2.put(j, key);
         }
 
-        return book;
+        map1.forEach((k1, v1) -> {
+            if (v1 == 4) {
+                map2.forEach((k2, v2) -> {
+                    if (k1.equals(v2)) {
+                        this.book.add(cards.get(k2));
+                    }
+                });
+            }
+        });
+
+        return this.book;
     }
 
-    public String askCard() {
-        int size = this.cards.size();
-        int indexRandom = (int) (Math.random() * size);
-        String cardValue = String.valueOf(cards.get(indexRandom).getValue());
-        return cardValue;
+    public boolean askCard(GoFishCard card) {
+        return cards.contains(card);
     }
 
     public void addCard(GoFishCard card) {
-        cards.add(card);
+        this.cards.add(card);
     }
 
-    public void drawOneCard(GoFishDeck deck) {
-        this.cards.add(deck.getCards().get(0));
-        deck.removeCard(deck.getCards().get(0));
+    public void drawOneCard(GoFishCard card) {
+        this.cards.add(card);
     }
 
     public void removeCard(GoFishCard card) {
-        cards.remove(card);
+        this.cards.remove(card);
     }
 
-    public void removeBook(ArrayList<GoFishCard> cards) {
-        for (GoFishCard card : cards) {
+    public void removeBook(ArrayList<GoFishCard> book) {
+        
+        for (GoFishCard card : book) {
             this.cards.remove(card);
         }
         score++;
@@ -88,20 +93,8 @@ public class GoFishHand extends GroupOfCards {
         }
     }
 
-    public GoFishDeck getDeck() {
-        return this.deck;
-    }
-
-    public void setDeck(GoFishDeck deck) {
-        this.deck = deck;
-    }
-
     public int getScore() {
         return this.score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
     }
 
 }

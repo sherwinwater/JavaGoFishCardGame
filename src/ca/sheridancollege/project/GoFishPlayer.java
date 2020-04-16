@@ -1,3 +1,8 @@
+/**
+ * SYST 17796 Project Winter 2019 Base code.
+ * @Modifier: Group7: Thanveer Hauzaree,Yuxiao Fang,Shuwen Wang,Chen-yu Wu
+ * @updateDate: 2020-04-12
+ */
 package ca.sheridancollege.project;
 
 public class GoFishPlayer extends Player {
@@ -32,7 +37,6 @@ public class GoFishPlayer extends Player {
      */
     public void Player(String name) {
         // TODO - implement GoFishPlayer.Player
-        throw new UnsupportedOperationException();
     }
 
     /**

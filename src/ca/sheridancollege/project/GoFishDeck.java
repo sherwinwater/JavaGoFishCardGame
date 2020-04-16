@@ -1,3 +1,8 @@
+/**
+ * SYST 17796 Project Winter 2019 Base code.
+ * @Modifier: Group7: Thanveer Hauzaree,Yuxiao Fang,Shuwen Wang,Chen-yu Wu
+ * @updateDate: 2020-04-12
+ */
 package ca.sheridancollege.project;
 
 import ca.sheridancollege.project.GoFishCard.Suit;
@@ -19,8 +24,9 @@ public class GoFishDeck extends GroupOfCards {
         return this.cards;
     }
 
+    @Override
     public void shuffle() {
-        Collections.shuffle(cards);
+        Collections.shuffle(this.cards);
     }
 
     public void setCards(ArrayList<GoFishCard> cards) {
@@ -36,7 +42,7 @@ public class GoFishDeck extends GroupOfCards {
     }
 
     public void removeCard(GoFishCard card) {
-        cards.remove(card);
+        this.cards.remove(card);
     }
 
     public void removeCards(ArrayList<GoFishCard> cards) {
@@ -44,4 +50,14 @@ public class GoFishDeck extends GroupOfCards {
             this.cards.remove(card);
         }
     }
+    
+    public GoFishCard DispatchOneCard(){
+        return this.cards.get(0);
+    }
+    
+    public void removeFirstCard(){
+        this.cards.remove(this.cards.get(0));
+    }
+    
+    
 }

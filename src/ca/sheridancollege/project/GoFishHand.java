@@ -1,7 +1,7 @@
 /**
- * SYST 17796 Project Winter 2019 Base code.
+ * SYST 17796 Project Winter 2020
  *
- * @Modifier: Group7: Thanveer Hauzaree,Yuxiao Fang,Shuwen Wang,Chen-yu Wu
+ * @author: Group7: Thanveer Hauzaree,Yuxiao Fang,Shuwen Wang,Chen-yu Wu
  * @updateDate: 2020-04-12
  */
 package ca.sheridancollege.project;
@@ -12,7 +12,6 @@ import java.util.HashMap;
 public class GoFishHand extends GroupOfCards {
 
     private ArrayList<GoFishCard> cards = new ArrayList<>();
-    private ArrayList<GoFishCard> book = new ArrayList<>();
     private GoFishDeck deck;
     private int score = 0;
     private int size;//the size of the grouping
@@ -35,9 +34,10 @@ public class GoFishHand extends GroupOfCards {
         // map2 to store and get the key for each card
         HashMap<String, Integer> map1 = new HashMap<>();
         HashMap<Integer, String> map2 = new HashMap<>();
+        ArrayList<GoFishCard> book = new ArrayList<>();
 
-        for (int j = 0; j < cards.size(); j++) {
-            GoFishCard card = cards.get(j);
+        for (int j = 0; j < this.cards.size(); j++) {
+            GoFishCard card = this.cards.get(j);
             String key = card.getValue().toString();
             if (!map1.containsKey(key)) {
                 map1.put(key, 1);
@@ -51,13 +51,13 @@ public class GoFishHand extends GroupOfCards {
             if (v1 == 4) {
                 map2.forEach((k2, v2) -> {
                     if (k1.equals(v2)) {
-                        this.book.add(cards.get(k2));
+                        book.add(this.cards.get(k2));
                     }
                 });
             }
         });
 
-        return this.book;
+        return book;
     }
 
     public boolean askCard(GoFishCard card) {
@@ -77,7 +77,7 @@ public class GoFishHand extends GroupOfCards {
     }
 
     public void removeBook(ArrayList<GoFishCard> book) {
-        
+
         for (GoFishCard card : book) {
             this.cards.remove(card);
         }
@@ -95,6 +95,9 @@ public class GoFishHand extends GroupOfCards {
 
     public int getScore() {
         return this.score;
+    }
+    public void setScore(int score) {
+         this.score = score;
     }
 
 }

@@ -219,7 +219,6 @@ public class GoFishGame extends Game {
                     } else {
                         res = players.get(idOfAskedPlayer).getPlayerID() + " says: GOFISH";
                         System.out.println(res);
-                        System.out.println("deck " + deck.getCards());
                         if (!deck.getCards().isEmpty()) {
                             players.get(i).getHand().drawOneCard(deck.DispatchOneCard());
                             deck.removeFirstCard();

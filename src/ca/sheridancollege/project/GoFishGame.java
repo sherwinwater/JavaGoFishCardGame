@@ -15,8 +15,6 @@ public class GoFishGame extends Game {
 
     private GoFishDeck deck;
     private ArrayList<GoFishPlayer> players = new ArrayList<>();
-    private ArrayList<GoFishHand> hands = new ArrayList<>();
-    private ArrayList<GoFishCard> cards = new ArrayList<>();
     private static int numOfPlayers;
 
     public GoFishGame(String givenName) {
@@ -68,7 +66,6 @@ public class GoFishGame extends Game {
         this.deck = new GoFishDeck(52);
         this.deck.initDeck();
         this.deck.shuffle();
-        this.cards = deck.getCards();
         setPlayers();
     }
 
@@ -93,10 +90,10 @@ public class GoFishGame extends Game {
         ArrayList<GoFishCard> book = players.get(i).getHand().getBook();
         if (!book.isEmpty()) {
             System.out.println(players.get(i).getPlayerID() + " says I have a book : " + book);
-            hands.get(i).removeBook(book);
+            players.get(i).getHand().removeBook(book);
 
-            if (hands.get(i).getCards().isEmpty()) {
-                hands.get(i).drawUpFiveCards(deck);
+            if (players.get(i).getHand().getCards().isEmpty()) {
+                players.get(i).getHand().drawUpFiveCards(deck);
             }
         }
     }
@@ -113,7 +110,6 @@ public class GoFishGame extends Game {
                     GoFishPlayer player = new GoFishPlayer(playername);
                     GoFishHand hand = new GoFishHand();
                     hand.setCards(deck.DispatchStartCards(5));
-                    hands.add(hand);
                     player.setHand(hand);
                     player.setId(i);
                     players.add(player);
@@ -133,7 +129,7 @@ public class GoFishGame extends Game {
         Scanner sc = new Scanner(System.in);
         String res = "";
         for (int i = 0; i < numOfPlayers; i++) {
-            if (!hands.get(i).getCards().isEmpty()) {
+            if (!players.get(i).getHand().getCards().isEmpty()) {
                 callTurns(i);
                 System.out.println("Deck size: " + deck.getCards().size());
 
